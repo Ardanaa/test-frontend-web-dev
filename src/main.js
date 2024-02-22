@@ -8,6 +8,9 @@ import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
+// globally import tailwind classes
+import './assets/tailwind.css'
+
 const vuetify = createVuetify({
   components,
   directives,
