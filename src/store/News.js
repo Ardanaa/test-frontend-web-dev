@@ -1,7 +1,6 @@
-// src/stores/newsStore.js
 import { defineStore } from 'pinia';
 import axios from 'axios';
-import { apiKey } from '../config';
+import { apiKey } from '../../config';
 
 export const useNewsStore = defineStore({
   id: 'news',

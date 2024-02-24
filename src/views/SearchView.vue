@@ -1,10 +1,11 @@
 <template>
     <v-container>
       <v-row>
-        <v-col v-for="article in searchResults" :key="article.title">
+        <v-col sm="4" v-for="article in searchResults" :key="article.title">
           <CardB
           class="h-full"
           v-bind="formatNews(article)"
+          @click="handleNewsClick(article)"
         />
         </v-col>
       </v-row>
@@ -14,7 +15,8 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { useNewsStore } from '../store/News';
-import { useRoute } from 'vue-router';
+import { useRoute, onBeforeRouteUpdate } from 'vue-router';
+import saveReadNews from '../utils/localStorage'
 import CardB from '../components/Card/B.vue';
 
 const route = useRoute();
@@ -28,18 +30,20 @@ const formatNews = (news) => ({
   href: news.url,
 })
 
+const handleNewsClick = (news) => {
+  saveReadNews(news);
+}
+
 onMounted(() => {
   // Initialize searchResults with the initial data
   searchResults.value = newsStore.searchResults;
+});
 
+onBeforeRouteUpdate((to, from, next) => {
   // Watch for changes in the route params and update the search results
-  watch(
-    () => route.params.query,
-    (newQuery) => {
-      newsStore.searchNews(newQuery);
-      searchResults.value = newsStore.searchResults;
-    }
-  );
+  newsStore.searchNews(to.params.query);
+  searchResults.value = newsStore.searchResults;
+  next();
 });
 
 

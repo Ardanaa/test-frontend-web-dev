@@ -1,12 +1,16 @@
 <template>
 	<v-card>
 		<v-toolbar color="indigo">
-			<v-toolbar-title class="font-bold text-2xl">
-				<v-btn to="/">News</v-btn>
+			<v-toolbar-title >
+				<v-btn class="font-bold text-3xl" to="/">News</v-btn>
+        <v-btn v-for="item in menuItems" :key="item.title" :to="item.path">
+          {{ item.title }}
+        </v-btn>
 			</v-toolbar-title>
+			<v-spacer />
 
 			<v-text-field
-				class="mt-5 py-2"
+				class="mt-5 py-2 mr-2"
 				density="compact"
 				append-inner-icon="mdi-magnify"
 				v-model="search"
@@ -16,13 +20,7 @@
 				@keyup.enter="handleEnter"
 			>
 			</v-text-field>
-			<v-spacer />
 
-			<v-toolbar-items>
-				<v-btn v-for="item in menuItems" :key="item.title" :to="item.path">
-					{{ item.title }}
-				</v-btn>
-			</v-toolbar-items>
 
 		</v-toolbar>
 	</v-card>

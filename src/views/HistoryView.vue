@@ -15,9 +15,8 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import CardA from '../components/Card/A.vue'
-import { formatPublishedAt } from '../helpers/dateHelper'
 
-const newsItems = ref({});
+const newsItems = ref([]);
 console.log(newsItems.value);
 
 const formatNews = (news) => ({
@@ -34,8 +33,8 @@ onMounted(() => {
     if (storedNewsItems) {
       const parsedNewsItems = JSON.parse(storedNewsItems);
 
-      newsItems.value = parsedNewsItems;
-      newsItems.value = newsItems.value.flat().reverse();
+      newsItems.value = parsedNewsItems.flat().reverse();
+      console.log('local',newsItems.value);
     }
   } catch (error) {
     console.error('Error while parsing JSON data from local storage:', error);
