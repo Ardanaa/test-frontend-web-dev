@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full">
+  <div class="w-full h-full py-3">
     <v-card 
     color="indigo-darken-4"
     :href="href"
@@ -12,12 +12,12 @@
         cover
         :src="image"
       />
-      <v-chip class="absolute top-2 left-2" variant="flat">
+      <v-chip v-if="source" class="absolute top-2 left-2" variant="flat">
         {{ source }}
       </v-chip>
     </div>
     <v-card-title v-if="title"> {{ title }} </v-card-title>
-    <v-card-subtitle> {{ author ? `${author} - ${datePublished}` : `${datePublished}` }} </v-card-subtitle>
+    <v-card-subtitle v-if="author || datePublished"> {{ author ? `${author} - ${datePublished}` : `${datePublished}` }} </v-card-subtitle>
     <v-card-text v-if="description"> {{ description }}</v-card-text>
   </v-card>
   </div>
