@@ -55,9 +55,6 @@ const handleSearch = (event) => {
 const handleEnter = () => {
   if (search.value.trim() === "") {
     showAlert.value = true
-    // setTimeout(() => {
-    //   showAlert.value = false
-    // }, 3000)
   } else {
     router.push({ name: "SearchResults", params: { query: search.value } })
   }
